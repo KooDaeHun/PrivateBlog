@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Board">
+	<typeAlias alias="Board" type="kr.ac.pohang.BlogBoardDTO"/>
+	
+	<resultMap class="Board" id="BoardResult">
+		<result property="num" column="num"/>
+		<result property="title" column="title"/>
+		<result property="name" column="name"/>
+		<result property="creation" column="creation"/>
+		<result property="content" column="content"/>
+		<result property="recommend" column="recommend"/>
+		<result property="readcount" column="readcount"/>
+	</resultMap>
+	<select id="boardAll" resultMap="BoardResult">
+		SELECT * FROM blogboard
+	</select>
+	<select id="getContent" resultMap="BoardResult" parameterClass="Integer">
+		SELECT * FROM blogboard WHERE num=#num#
+	</select>
+</sqlMap>

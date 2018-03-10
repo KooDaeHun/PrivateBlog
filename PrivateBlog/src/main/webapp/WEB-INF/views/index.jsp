@@ -4,7 +4,7 @@
 <c:set var="pagefile" value="${param.page }"/>
 <c:choose>
 	<c:when test="${pagefile == null }">
-		<c:set var="pagefile" value="info"/>
+		<c:set var="pagefile" value="info.jsp"/>
 	</c:when>
 </c:choose>
 <!DOCTYPE html>
