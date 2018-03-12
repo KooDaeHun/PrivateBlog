@@ -11,7 +11,7 @@
 	width: 1000px;
 	background-color: lightgray;
 	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 6px;
 }
 
 .creationInfoDiv {
@@ -22,24 +22,21 @@
 	padding-left: 10px;
 }
 
-.titleDiv {
-	width: 970px;
-	margin: auto;
+.titleInput {
+	width: 957px;
+	height: 10px;
 	margin-top: 10px;
-	height: 35px;
-	line-height: 35px;
-	padding-left: 10px;
-	background-color: white;
+	margin-left: 10px;
+	padding: 10px;
 }
 
-.contentDiv {
-	width: 956px;
-	height: auto;
-    min-height: 470px;
-	margin: auto;
+.conTextarea {
+	width: 959px;
+	height: 450px;
+	padding: 10px;
+	margin-left: 10px;
 	margin-top: 10px;
-	padding: 12px;
-	background-color: white;
+	resize: none;
 }
 
 .recommendDiv {
@@ -78,35 +75,60 @@
 	width: 116px;
 	float: right;
 }
+
+.listLink {
+	width: 83px;
+	height: 22px;
+	line-height: 24px;
+	text-shadow: 3.5px 1.5px 0px rgba(0, 0, 0, 0.15);
+	border-radius: 15px;
+	display: inline-block;
+	border: 2px solid;
+	transition: all 0.5s;
+	cursor: pointer;
+	font-size: 12pt;
+	font-weight: bolder;
+	text-align: center;
+	margin-top: 10px;
+	margin-left: 820px;
+}
+
+.listLink:hover {
+	box-shadow: inset 0px 0px 1px 3.5px rgba(153, 153, 153, 0.5);
+	text-shadow: 0px 0px 0px rgba(255, 225, 255, 0);
+	text-align: center;
+}
+
+.writeCompletion {
+	margin-left: 0px;
+}
 </style>
 </head>
 <body>
-<c:set var="content" value="${content}"/>
-	
+
 	<div class="wrapperDiv">
 		<div class="creationInfoDiv">
 			<div class="nickName">
-				${content.name} 
+				<!-- session에서 얻어오는 ID -->
 			</div>
 			<div class="recoImg">
-				0
+				
 			</div>
 			<div class="creationInfo">
-				${content.recommend} &ensp;${content.creation}
+				<!-- 시스템상 오늘 날짜 -->
 			</div>
 		</div>
-		<div class="titleDiv">
-			${content.title}
-		</div>
-		<div class="contentDiv">
-			${content.content}
-		</div>
-		<div class="recommendDiv">
-			${content.recommend}
-		</div>
-		<div class="backListDiv">
-			<a href="board">전체목록으로</a>
-		</div>
+
+			<input class="titleInput" type="text" name="title" maxlength="40" placeholder="Title"/>
+
+
+			<textarea class="conTextarea" name="content"></textarea>
+	</div>
+	<div class="listLink" id="resume">
+			<a href="board">목록으로</a>
+	</div>
+	<div class="listLink writeCompletion" id="resume">
+			<a href="#">글쓰기</a>
 	</div>
 </body>
 </html>

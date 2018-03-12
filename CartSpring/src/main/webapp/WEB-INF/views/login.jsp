@@ -13,7 +13,7 @@
 	<%@ include file="cart_header.jsp" %>
 	<div align="center" class="body">
 		<h2>로그인 화면</h2>
-		<form action="loginProcess" method="GET">
+		<form action="loginProcess" method="get">
 			<table>
 				<tr height="40px">
 					<td>유저ID</td>

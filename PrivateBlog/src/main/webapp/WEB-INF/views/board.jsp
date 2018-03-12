@@ -75,6 +75,9 @@ th, td {
 				<td class="readcount" align="right">${board.readcount}</td>
 			</tr>
 		</c:forEach>
+		<form action="write">
+			<input type="submit" value="글쓰기"/>
+		</form>
 	</table>
 </body>
 </html>

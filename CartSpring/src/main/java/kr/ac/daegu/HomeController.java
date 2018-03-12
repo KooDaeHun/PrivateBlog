@@ -78,7 +78,7 @@ public class HomeController {
 		} else {
 			if(password.equals(user.getPassword())) {
 				mav.addObject("user",user);
-				request.getSession().setAttribute("loginUser", user);
+				request.getSession().setAttribute("loginUser", user); 
 			} else {
 				System.out.println("로그인되었습니다.");
 			}
@@ -90,6 +90,10 @@ public class HomeController {
 	public String userEntry() {
 		return "userEntry";
 	}
+	
+	
+	
+	
 	@RequestMapping(value="userEntryProc", method=RequestMethod.GET)
 	public ModelAndView userEntry(ModelAndView mav, UserDTO user) {
 		ibaties.insertUser(user);
