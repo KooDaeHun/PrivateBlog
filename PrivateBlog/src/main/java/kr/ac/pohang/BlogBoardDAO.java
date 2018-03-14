@@ -26,8 +26,9 @@ public class BlogBoardDAO {
 		}
 	}
 	public List boardAll() {
+		List list = null;
 		try {
-			List list = sqlMapper.queryForList("boardAll");
+			list = sqlMapper.queryForList("boardAll");
 			return list;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -35,6 +36,27 @@ public class BlogBoardDAO {
 		}
 		return null;
 	}
+	public List boardSearch(String title) {
+		List list = null;
+		try {
+			list = sqlMapper.queryForList("boardSearch", title);
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	public void insertBoard(BlogBoardDTO boardDTO) {
+		try {
+			sqlMapper.insert("insertBoard", boardDTO);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public BlogBoardDTO getContent(Integer num) {
 		BlogBoardDTO boardDTO = null;
 		try {
@@ -46,4 +68,12 @@ public class BlogBoardDAO {
 		
 		return boardDTO; 
 	}
+	public String today() {
+		String now = null;
+		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		now = formatter.format(new java.util.Date());
+		System.out.println(now);
+		return now;
+	}
+	
 }

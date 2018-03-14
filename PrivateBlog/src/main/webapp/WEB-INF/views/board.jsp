@@ -52,6 +52,42 @@ th, td {
 	width: 48px;
 	text-align: center;
 }
+.searchDiv{
+	width: 368px;
+    height: 34px;
+    margin-left: 632px;
+}
+.searchTitle{
+	width: 302px;
+    height: 28px;
+    padding-left: 10px
+}
+.titleSubmit{
+	width: 52px;
+    height: 32px;
+    position: absolute;
+}
+.writeDiv{
+	width: 60px;
+    height: 36px;
+    margin-left: 940px;
+}
+.writeA{
+	color: white;
+    font-size: 20px;
+    text-shadow: 1px 0 47px black, 0 1px 45px black, 1px 0 24px black, 0 -1px 1px black;
+}
+.writeA:hover{
+	color: black;
+    font-weight: bold;
+    text-shadow: 0 0 0 white;
+    transition: text-shadow 0.5s ease;
+}
+.pageDiv{
+    height: 38px;
+    padding-top: 18px;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -75,9 +111,20 @@ th, td {
 				<td class="readcount" align="right">${board.readcount}</td>
 			</tr>
 		</c:forEach>
-		<form action="write">
-			<input type="submit" value="글쓰기"/>
-		</form>
+		
+		<div class="writeDiv">
+			<a class="writeA" href="write">글쓰기</a>
+		</div>
+		
+		<div class="searchDiv">
+			<form action="boardSearch" method="post">
+				<input name="title" class="searchTitle" type="text" placeholder="Title Search"/>
+				<input class="titleSubmit" type="submit" value="Search!"/>	
+			</form>
+		</div>
 	</table>
+	<div class="pageDiv">
+			<jsp:include page="page.jsp"/>
+	</div>
 </body>
 </html>

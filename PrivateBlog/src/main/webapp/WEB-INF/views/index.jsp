@@ -22,11 +22,14 @@
 	top: 64px;
 	left: 294px;
 	width: 1000px;
+	z-index: 1;
+	margin-bottom: 100px;
 }
 .leftLayout{
 	position: fixed;
 	left: 0;
 	top: 0px;
+	z-index: 2;
 }
 </style>
 </head>
@@ -37,6 +40,5 @@
 	<div class="infoDiv">
 		<jsp:include page="${pagefile }"/>
 	</div>
-	
 </body>
 </html>

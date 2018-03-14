@@ -21,4 +21,11 @@
 	<select id="getContent" resultMap="BoardResult" parameterClass="Integer">
 		SELECT * FROM blogboard WHERE num=#num#
 	</select>
+	<select id="boardSearch" resultMap="BoardResult" parameterClass="String">
+		<!-- SELECT * FROM blogboard WHERE <![CDATA[title LIKE '%' || #title# || '%']]> -->
+		SELECT * FROM blogboard WHERE <![CDATA[SOUNDEX(title) = SOUNDEX(#title#) OR title LIKE '%'||#title#||'%']]>
+	</select>
+	<insert id="insertBoard" parameterClass="Board">
+		INSERT INTO blogboard(num, title, name, creation, content, recommend, readcount) VALUES(seq_num.nextval, #title#, #name#, #creation#, #content#, 1, 1)
+	</insert>
 </sqlMap>

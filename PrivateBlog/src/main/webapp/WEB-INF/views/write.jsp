@@ -77,20 +77,20 @@
 }
 
 .listLink {
-	width: 83px;
-	height: 22px;
-	line-height: 24px;
-	text-shadow: 3.5px 1.5px 0px rgba(0, 0, 0, 0.15);
-	border-radius: 15px;
-	display: inline-block;
-	border: 2px solid;
-	transition: all 0.5s;
-	cursor: pointer;
-	font-size: 12pt;
-	font-weight: bolder;
-	text-align: center;
-	margin-top: 10px;
-	margin-left: 820px;
+	    width: 83px;
+    height: 22px;
+    line-height: 24px;
+    text-shadow: 3.5px 1.5px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    display: inline-block;
+    border: 2px solid;
+    transition: all 0.5s;
+    cursor: pointer;
+    font-size: 12pt;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 830px;
 }
 
 .listLink:hover {
@@ -102,33 +102,62 @@
 .writeCompletion {
 	margin-left: 0px;
 }
+.writeInput{
+    width: 69px;
+    border: 0px;
+    position: absolute;
+    margin-top: 4px;
+}
+.writeSubmit{
+	width: 83px;
+    height: 26px;
+    line-height: 26px;
+    text-shadow: 3.5px 1.5px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    display: inline-block;
+    border: 2px solid;
+    transition: all 0.5s;
+    cursor: pointer;
+    font-size: 12pt;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 10px;
+    background-color: white;
+    position: absolute;
+}
+.writeSubmit:hover{
+	box-shadow: inset 0px 0px 1px 3.5px rgba(153, 153, 153, 0.5);
+	text-shadow: 0px 0px 0px rgba(255, 225, 255, 0);
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
-
+<form action="writeCompletion" method="post">
 	<div class="wrapperDiv">
 		<div class="creationInfoDiv">
 			<div class="nickName">
-				<!-- session에서 얻어오는 ID -->
+			
+				<input name="name" class="writeInput" type="text" value="${user.id}" readonly="readonly"/>
+				
 			</div>
 			<div class="recoImg">
 				
 			</div>
 			<div class="creationInfo">
-				<!-- 시스템상 오늘 날짜 -->
+			
+				<input name="creation" class="writeInput" type="text" value="${today}" readonly="readonly"/>
+				
 			</div>
 		</div>
-
-			<input class="titleInput" type="text" name="title" maxlength="40" placeholder="Title"/>
-
-
-			<textarea class="conTextarea" name="content"></textarea>
+		<input name="title" class="titleInput" type="text" name="title" maxlength="40" placeholder="Title"/>
+		<textarea name="content" class="conTextarea" name="content"></textarea>
 	</div>
 	<div class="listLink" id="resume">
 			<a href="board">목록으로</a>
 	</div>
-	<div class="listLink writeCompletion" id="resume">
-			<a href="#">글쓰기</a>
-	</div>
+	<input class="writeSubmit" type="submit" value="글쓰기"/>
+</form>
 </body>
 </html>

@@ -21,6 +21,7 @@ a {
 	width: 256px;
 	height: 734px;
 	box-shadow: 3px 0px 5px 0.5px rgba(153, 153, 153, 0.5);
+	z-index: 2;
 }
 
 .logoDiv {
@@ -155,7 +156,7 @@ a {
     text-align: center;
     position: absolute;
     margin-top: 3px;
-    margin-left: 21px;
+    margin-left: -11px;
 }
 
 .myPageDiv:hover {
@@ -167,12 +168,12 @@ a {
 	margin-left: 15px;
     font-size: 17px;
     font-weight: bold;
-    width: 100px;
+    width: 129px;
     height: 28px;
     float: left;
 }
 .logoutDiv{
-	margin-left: 77px;
+	margin-left: 45px;
 }
 </style>
 </head>
@@ -184,9 +185,6 @@ a {
 		</div>
 		
 		
-		
-		
-		 
 		
 		
 		<c:choose>
@@ -215,7 +213,7 @@ a {
 			<c:when test="${not empty user}">
 				<div class="memberDiv">
 					<div class="userDiv">
-						<c:out value="${user.id}" />님
+						${user.id}님
 					</div>
 					<div class="myPageDiv">
 						<a href="board">MyPage</a>
