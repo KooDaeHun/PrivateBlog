@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap	namespace="Sale">
+	<typeAlias alias="Sale" type="kr.ac.daegu.SaleDTO"/>
+	<resultMap class="Sale" id="SaleResult">
+		<result property="sale_id" column="sale_id"/>
+		<result property="user_id" column="user_id"/>
+		<result property="update_time" column="update_time"/>
+	</resultMap>
+	
+	<select id="selectMaxSaleId" resultClass="Integer">
+		SELECT IFNULL(MAX(sale_id),0) AS sale_id FROM sale
+	</select>
+	<insert id="insertSale" parameterClass="Sale">
+		INSERT INTO sale(sale_id, user_id, update_time) VALUES($sale_id$, #user_id#, $updateTime$)
+	</insert>
+</sqlMap>

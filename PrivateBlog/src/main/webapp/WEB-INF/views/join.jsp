@@ -6,6 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <style>
 .joinWrapper{
    width: 468px;
@@ -22,6 +23,7 @@
     height: 32px;
     padding-left: 10px;
     font-size: 20px;
+    ime-mode: disavled
 }
 .idCheck{
 	width: 101px;
@@ -71,26 +73,50 @@
 </style>
 </head>
 <body>
-	<h1 class="titleH1">Membership Card</h1>
+	<h1 class="titleH1">메일 인증 안됨 id,pw,email만 입력 후 가입</h1>
 	<div class="joinWrapper">
-	<form method="get" action="joinProsessor">
+	
+	<form method="post" action="joinProsessor">
+		
 		<input class="joinID" name="id" type="text" maxlength="10" placeholder="ID" required="required"/>
 		<input class="idCheck" type="button" onclick="checkID(this.form)" value="IDcheck!"/>
-		<input class="joinPW" name="pw" type="text" minlength="8" maxlength="10" placeholder="Password" required="required"/>
-		<input class="joinPW" type="text" minlength="8" maxlength="10" placeholder="PasswordCheck" required="required"/>
+
+		
+		
+		<input id="pw1" name="pw" oninput="checkPwd()" class="joinPW" type="password" minlength="8" maxlength="10" placeholder="Password" required="required"/>
+		<input id="pw2" oninput="checkPwd()" class="joinPW" type="password" minlength="8" maxlength="10" placeholder="PasswordCheck" required="required"/>
+		
+		
+		
 		<input class="joinEMAIL" name="email" type="text" placeholder="E-Mail" required="required"/>		
 		<input class="joinMailCheck" type="button" value="MailCheck!"/>
 		<input class="joinMailNumber" type="text" value="인증번호 입력"/>
 		<input class="joinBtn" type="submit" value="JOIN!"/>
 	</form>
 	</div>
-
+	
 <script type="text/javascript">
 // idCheck -> 중복 체크하는 기능 home에서 코딩해야함.
 	function checkID(myform) {
-		url = "idCheck";
-		window.open(url, "win01", "width=300 height=300");
+		url = "idCheck?id="+myform.id.value;
+		window.open(url, "win01", "width=300, height=10, top=300px,left=580px");
 	}
+	function checkPwd() {
+	    var pw1 = $('#pw1').val();
+	    var pw2 = $('#pw2').val();
+	    
+	    if(pw2=="" && (pw1 != pw2 || pw1 == pw2)){
+	        $("#pw2").css("background-color", "#FFCECE");
+	    }
+	    else if (pw1 == pw2) {
+	        $("#pw2").css("background-color", "#B0F6AC");
+	       
+	    } else if (pw1 != pw2) {
+	        pwdCheck = 0;
+	        $("#pw2").css("background-color", "#FFCECE");
+	    }
+	}
+	
 </script>
 </body>
 </html>

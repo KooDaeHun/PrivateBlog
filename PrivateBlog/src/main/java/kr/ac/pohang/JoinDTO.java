@@ -1,9 +1,11 @@
 package kr.ac.pohang;
 
 public class JoinDTO {
+	private Integer usernum;
 	private String id;
 	private String pw;
 	private String email;
+	private Integer stone;
 	
 	public JoinDTO() {
 		super();
@@ -26,6 +28,18 @@ public class JoinDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Integer getStone() {
+		return stone;
+	}
+	public void setStone(Integer stone) {
+		this.stone = stone;
+	}
+	public Integer getUsernum() {
+		return usernum;
+	}
+	public void setUsernum(Integer usernum) {
+		this.usernum = usernum;
 	}
 	
 	

@@ -16,7 +16,7 @@
 		<result property="readcount" column="readcount"/>
 	</resultMap>
 	<select id="boardAll" resultMap="BoardResult">
-		SELECT * FROM blogboard
+		SELECT * FROM blogboard ORDER BY num DESC
 	</select>
 	<select id="getContent" resultMap="BoardResult" parameterClass="Integer">
 		SELECT * FROM blogboard WHERE num=#num#
@@ -28,4 +28,10 @@
 	<insert id="insertBoard" parameterClass="Board">
 		INSERT INTO blogboard(num, title, name, creation, content, recommend, readcount) VALUES(seq_num.nextval, #title#, #name#, #creation#, #content#, 1, 1)
 	</insert>
+	<update id="updateReadcountBoard" parameterClass="Board">
+		UPDATE blogboard SET readcount=#readcount# WHERE num=#num#
+	</update>
+	<update id="updateRecommendBoard" parameterClass="Board">
+		UPDATE blogboard SET RECOMMEND=#recommend# WHERE num=#num#;
+	</update>
 </sqlMap>

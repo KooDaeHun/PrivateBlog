@@ -7,12 +7,14 @@
 	<typeAlias alias="User" type="kr.ac.pohang.JoinDTO"/>
 	
 	<resultMap class="User" id="UserResult">
+		<result property="usernum" column="usernum"/>
 		<result property="id" column="id"/>
 		<result property="pw" column="pw"/>
 		<result property="email" column="email"/>
+		<result property="stone" column="stone"/>
 	</resultMap>
 	<insert id="insertUser" parameterClass="User">
-		INSERT INTO bloguser(usernum, id, pw, email) VALUES(seq_user_num.nextval, #id#, #pw#, #email#)
+		INSERT INTO bloguser(usernum, id, pw, email, stone) VALUES(seq_user_num.nextval, #id#, #pw#, #email#, 100)
 	</insert>
 	<select id="login" resultClass="User" parameterClass="String">
 		SELECT * FROM bloguser WHERE id=#id#

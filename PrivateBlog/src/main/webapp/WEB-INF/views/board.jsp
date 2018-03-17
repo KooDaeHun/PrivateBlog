@@ -18,14 +18,18 @@
 }
 
 .tableCla {
-	border: 1px solid #444444;
 	border-collapse: collapse;
+	margin-top: 15px;
 }
 .tr1{
-	background-color: lightgray;
+	border-bottom: 1px solid black;
 }
-th, td {
-	border: 1px solid #444444;
+.tableHeader{
+	border-bottom: 1px solid black;
+	height: 35px;
+}
+td {
+	padding: 5px 0 5px 0;	
 }
 
 .no{
@@ -37,7 +41,7 @@ th, td {
 	padding-left: 10px;
 }
 .name{
-	width: 56px;
+	width: 101px;
 	text-align: center;
 }
 .creation{
@@ -93,18 +97,18 @@ th, td {
 <body>
 	<div>
 	<table class="tableCla">
-		<tr>
+		<tr class="tableHeader">
 			<th class="no">no</th>
 			<th class="title">제목</th>
 			<th class="name">작성자</th>
 			<th class="creation">날짜</th>
-			<th class="recommend">추천수</th>
-			<th class="readcount">조회수</th>
+			<th class="recommend">추천</th>
+			<th class="readcount">조회</th>
 		</tr>
 		<c:forEach items="${boardList}" var="board">
 			<tr class="tr1">
 				<td class="no" align="center">${board.num}</td>
-				<td class="title" align="left"><a class="titleA" href="clickTitle?num=${board.num}">${board.title}</a></td>
+				<td class="title" align="left"><a class="titleA" href="clickTitle?num=${board.num}&readcount=${board.readcount}">${board.title}</a></td>
 				<td class="name" align="right">${board.name}</td>
 				<td class="creation" align="right">${board.creation}</td>
 				<td class="recommend" align="right">${board.recommend}</td>

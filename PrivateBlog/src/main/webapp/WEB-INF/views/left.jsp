@@ -200,9 +200,8 @@ a {
 				<div class="loginDiv">
 					<form action="loginProsessor" method="post">
 						<div class="loginInfoDiv">
-							<input class="loginInput idInput" name="id" type="text"
-								placeholder="ID" name="id" /> <input class="loginInput"
-								name="pw" type="text" placeholder="Password" name="pw" />
+							<input class="loginInput idInput" name="id" type="text" placeholder="ID" maxlength="10"/> 
+							<input class="loginInput" name="pw" type="password" placeholder="Password" maxlength="10"/>
 						</div>
 						<div class="loginCompletionDiv">
 							<input class="loginButton" type="submit" value="Login">
@@ -221,8 +220,6 @@ a {
 					<div class="myPageDiv logoutDiv">
 						<a href="logout">Logout</a>
 					</div>
-
-
 				</div>
 				<div class="loginDiv">
 					
@@ -252,5 +249,6 @@ a {
 			<a href="resume">RESUME</a>
 		</div>
 	</div>
+
 </body>
 </html>

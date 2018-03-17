@@ -24,12 +24,19 @@ private static SqlMapClient sqlMapper;
 			throw new RuntimeException("TIME OVER"+e, e);
 		}
 	}
-	public void insertUser(JoinDTO join) {
-		try {
-			sqlMapper.insert("insertUser", join);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public boolean insertUser(JoinDTO join) {
+		String id = join.getId();
+		JoinDTO resultOB = login(id);
+		if(resultOB == null) {
+			try {
+				sqlMapper.insert("insertUser", join);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 	public JoinDTO login(String id) {

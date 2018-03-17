@@ -56,16 +56,28 @@ public class BlogBoardDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public BlogBoardDTO getContent(Integer num) {
-		BlogBoardDTO boardDTO = null;
+	public void updateReadcount(BlogBoardDTO boardDTO) {
 		try {
-			boardDTO = (BlogBoardDTO)sqlMapper.queryForObject("getContent", num);
+			sqlMapper.update("updateReadcountBoard", boardDTO);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	public BlogBoardDTO getContent(Integer num) {
+		BlogBoardDTO boardDTO = null;
+		try {
+			boardDTO = (BlogBoardDTO)sqlMapper.queryForObject("getContent", num);
+			Integer read = boardDTO.getReadcount();
+			read++;
+			boardDTO.setReadcount(read);
+			updateReadcount(boardDTO);
+			boardDTO = (BlogBoardDTO)sqlMapper.queryForObject("getContent", num);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return boardDTO; 
 	}
 	public String today() {
@@ -75,5 +87,6 @@ public class BlogBoardDAO {
 		System.out.println(now);
 		return now;
 	}
+	
 	
 }

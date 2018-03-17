@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=utf-8"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <!DOCTYPE html>
@@ -9,9 +12,10 @@
 <style>
 .wrapperDiv {
 	width: 1000px;
-	background-color: lightgray;
 	padding-top: 10px;
-	padding-bottom: 6px;
+    padding-bottom: 6px;
+	border: 2px solid gray;
+    border-radius: 9px;
 }
 
 .creationInfoDiv {
@@ -28,6 +32,8 @@
 	margin-top: 10px;
 	margin-left: 10px;
 	padding: 10px;
+	border: 1px solid gray;
+    border-radius: 4px;
 }
 
 .conTextarea {
@@ -37,6 +43,8 @@
 	margin-left: 10px;
 	margin-top: 10px;
 	resize: none;
+	border: 1px solid gray;
+    border-radius: 4px;
 }
 
 .recommendDiv {
@@ -77,7 +85,7 @@
 }
 
 .listLink {
-	    width: 83px;
+	width: 83px;
     height: 22px;
     line-height: 24px;
     text-shadow: 3.5px 1.5px 0px rgba(0, 0, 0, 0.15);
@@ -103,7 +111,7 @@
 	margin-left: 0px;
 }
 .writeInput{
-    width: 69px;
+    width: 89px;
     border: 0px;
     position: absolute;
     margin-top: 4px;
@@ -138,8 +146,15 @@
 	<div class="wrapperDiv">
 		<div class="creationInfoDiv">
 			<div class="nickName">
-			
-				<input name="name" class="writeInput" type="text" value="${user.id}" readonly="readonly"/>
+			<c:choose>
+				<c:when test="${user.id == null }">
+					<input name="name" class="writeInput" type="text" value="로그인 하세요!" readonly="readonly"/>
+				</c:when>
+				<c:otherwise>
+					<input name="name" class="writeInput" type="text" value="${user.id}" readonly="readonly"/>
+				</c:otherwise>
+			</c:choose>
+				
 				
 			</div>
 			<div class="recoImg">
@@ -151,8 +166,17 @@
 				
 			</div>
 		</div>
-		<input name="title" class="titleInput" type="text" name="title" maxlength="40" placeholder="Title"/>
-		<textarea name="content" class="conTextarea" name="content"></textarea>
+		<c:choose>
+			<c:when test="${user.id == null}">
+				<input class="titleInput" type="text" placeholder="Title" readonly="readonly"/>
+				<textarea class="conTextarea" readonly="readonly"></textarea>
+			</c:when>
+			<c:otherwise>
+				<input name="title" class="titleInput" type="text" maxlength="40" placeholder="Title"/>
+				<textarea name="content" class="conTextarea" placeholder="Content"></textarea>
+			</c:otherwise>
+		</c:choose>
+
 	</div>
 	<div class="listLink" id="resume">
 			<a href="board">목록으로</a>

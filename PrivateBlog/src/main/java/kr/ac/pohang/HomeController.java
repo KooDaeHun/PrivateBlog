@@ -1,10 +1,14 @@
 package kr.ac.pohang;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,15 +48,18 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
+
 		return "index";
 	}
  
 	@RequestMapping("index")
 	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		JoinDTO joinDTO = (JoinDTO)request.getSession(false).getAttribute("loginUser");
-		modelAndView.addObject("user", joinDTO);
+		if(request.getSession().getAttribute("loginUser") != null) {
+			JoinDTO joinDTO = (JoinDTO)request.getSession(false).getAttribute("loginUser");
+			modelAndView.addObject("user", joinDTO);
+		}
+		
 		modelAndView.setViewName("index");
 		
 		return modelAndView;
@@ -63,7 +70,6 @@ public class HomeController {
 		int count = 0;
 		int last = (int)list.size()-1;
 		
-//		새로 고침 눌렀을 때 엉뚱한 카운터 방지.
 		fiftyArray.clear();
 		allArray.clear();
 		pageArray.clear();
@@ -83,14 +89,10 @@ public class HomeController {
 					allArray.add(fiftyArray);
 				}
 			}
-//			50개 묶음 1페이지 기준 총 몇 페이지인지
 			for(Integer x=1; x<allArray.size()+1; x++) {
 				pageDTO.setPageNumber(x);
 				pageArray.add(pageDTO);
 				pageDTO = new PageDTO();
-			}
-			for(Integer y=0; y<pageArray.size(); y++) {
-				System.out.println("페이지 번호 : "+pageArray.get(y).getPageNumber());
 			}
 			modelAndView.addObject("pageCount", pageArray);
 			if(pageNumber != null) {
@@ -164,8 +166,6 @@ public class HomeController {
 		}
 		JoinDTO joinDTO = (JoinDTO)request.getSession().getAttribute("loginUser");
 		modelAndView.addObject("user", joinDTO);
-		
-		modelAndView.addObject("boardList", allArray.get(0));
 		modelAndView.setViewName("index.jsp?page=board");
 		return modelAndView;
 	}
@@ -178,13 +178,35 @@ public class HomeController {
 		modelAndView.setViewName("index.jsp?page=join");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="joinProsessor", method=RequestMethod.GET)
+	@RequestMapping(value = "idCheck", method=RequestMethod.GET)
+	public void idCheck(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		JoinDTO joinDTO = joinDAO.login(id);
+		String divStyle = "<Div style='color: red; text-align: center; margin-top: 40px; font-size: 20px; font-weight: bold;'>";
+		String div = "</Div>";
+		if(joinDTO == null) {
+			if(id == "") {
+				out.print(divStyle+"ID를 입력해주세요!"+div);
+			} else {
+				out.print(divStyle+"사용 가능한 ID입니다."+div);
+			}
+		} else {
+			out.print(divStyle+"사용중인 ID입니다."+div);
+		}
+//		out.print("<input type='button' value='Next' onClick='self.close()'>");
+	}
+	@RequestMapping(value="joinProsessor", method=RequestMethod.POST)
 	public ModelAndView joinHandleRequest(ModelAndView modelAndView, JoinDTO join){
-		joinDAO.insertUser(join);
-		
-		modelAndView.addObject("userjoin", join);
-		modelAndView.setViewName("index");
+		boolean result = joinDAO.insertUser(join);
+		if(result == true) {			
+//			가입완료.jsp에서 받아 쓸 object
+			modelAndView.addObject("userjoin", join);
+			modelAndView.setViewName("index.jsp?page=loginSuccess");
+		} else {
+			modelAndView.setViewName("index.jsp?page=loginFail");
+		}
 		return modelAndView;
 	}
 
@@ -216,5 +238,20 @@ public class HomeController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
-	
+	@RequestMapping("recoUpdate")
+	public String asdf() {
+		return "recoUpdate";
+	}
+	@RequestMapping("test05_2")
+	public String asdfasdf() {
+		return "test05_2";
+	}
+	@RequestMapping("ajax")
+	public String ajaxss() {
+		return "ajax";
+	}
+	@RequestMapping("test02")
+	public String ajaxsssss() {
+		return "test02";
+	}
 }

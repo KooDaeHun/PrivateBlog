@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user">
+	<typeAlias alias="user" type="kr.ac.daegu.UserDTO" />
+
+	<resultMap id="userResult" class="user">
+		<result property="user_id" column="user_id" />
+		<result property="user_name" column="user_name" />
+		<result property="password" column="password" />
+		<result property="postcode" column="postcode" />
+		<result property="address" column="address" />
+		<result property="email" column="email" />
+		<result property="job" column="job" />
+		<result property="birthday" column="birthday" />
+	</resultMap>
+
+	<select id="selectUser" resultClass="user" parameterClass="user">
+		select *from USER_ACCOUNT where user_id=#user_id# and
+		password=#password#
+	</select>
+
+	<select id="selectTwo" resultClass="user" parameterClass="String">
+		select *from USER_ACCOUNT where user_id=#user_id#
+	</select>
+
+	<insert id="insertUser" parameterClass="user">
+		INSERT INTO user_account(user_id, user_name, password, postcode, address, email, job, birthday) values(#user_id#, #user_name#, #password#, #postcode#, #address#, #email#, #job#, #birthday#)
+	</insert>
+</sqlMap>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+    <sqlMap namespace="Item">
+    	<typeAlias alias="Item" type="kr.ac.daegu.ItemDTO"/>
+    	
+    	<resultMap class="Item" id="ItemResult">
+    		<result property="item_ID" column="item_ID"/>
+    		<result property="item_Name" column="item_Name"/>
+    		<result property="price" column="price"/>
+    		<result property="description" column="description"/>
+    		<result property="picture_Url" column="picture_Url"/>
+    	</resultMap>
+    	<select id="selectAll" resultMap="ItemResult">
+    		SELECT item_ID, item_Name, price, description, picture_Url FROM item
+    	</select>
+    	<select id="selectOne" resultMap="ItemResult" parameterClass="Integer">
+    		SELECT * FROM item WHERE item_ID=#item_ID#
+    	</select>
+    </sqlMap>
